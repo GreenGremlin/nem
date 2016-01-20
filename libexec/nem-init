@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# SOURCE
+# to instantiate with this, add:
+# tmp=`pwd`; # cd SUB_PATH/ && . nem-init2 && cd $tmp
+# to your bashrc
+
+_nem_resolve_link() {
+  $(type -p greadlink readlink | head -1) "$1"
+}
+
+_nem_abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+  
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(_nem_resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
+_nem_source() {
+  local out=`grep $'#[ \t]*SOURCE' $1`
+  if [ "$out" == "" ]; then
+    echo "0"
+    return
+  fi
+  echo "1"
+}
+
+export SUB_PATH=`pwd`
+
+case "$0" in
+bash | zsh)
+  source ../completions/nem.$0
+  ;;
+-bash )
+  source ../completions/nem.bash
+  ;;
+esac
+
+function nem() {
+    local original_path=$PATH
+    local source_command=0
+    export PATH="$SUB_PATH:$PATH"
+
+    libexec_path=$SUB_PATH
+
+    command="$1"
+    case "$command" in
+    "" | "-h" | "--help" )
+      nem-help
+      ;;
+    * )
+      command_path="$(command -v "nem-$command" || true)"
+      if [ ! -x "$command_path" ]; then
+        echo "nem: no such command \`$command'"
+      else
+          source_command=$(_nem_source $command_path)
+          shift
+          if [[ "$1" -eq "--complete" ]]; then
+              $command_path "$@"
+          elif [[ "$source_command" -eq 0 ]]; then
+              $command_path "$@"
+          else 
+              . $command_path "$@"
+          fi
+      fi
+      ;;
+    esac
+    export PATH=$original_path
+}
