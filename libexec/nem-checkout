@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Checking out nemesis : $1"
+exec "git -C $NEMESIS_ROOT checkout $1"
+echo "Nemesis source now at branch:"
+exec "git -C $NEMESIS_ROOT rev-parse --abbrev-ref HEAD"

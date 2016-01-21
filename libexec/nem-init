@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SOURCE
 # to instantiate with this, add:
-# tmp=`pwd`; # cd SUB_PATH/ && . nem-init2 && cd $tmp
+# tmp=`pwd`; # cd NEM_PATH/ && . nem-init && cd $tmp
 # to your bashrc
 
 _nem_resolve_link() {
@@ -11,7 +11,7 @@ _nem_resolve_link() {
 _nem_abs_dirname() {
   local cwd="$(pwd)"
   local path="$1"
-  
+
   while [ -n "$path" ]; do
     cd "${path%/*}"
     local name="${path##*/}"
@@ -31,7 +31,7 @@ _nem_source() {
   echo "1"
 }
 
-export SUB_PATH=`pwd`
+export NEM_PATH=`pwd`
 
 case "$0" in
 bash | zsh)
@@ -45,9 +45,9 @@ esac
 function nem() {
     local original_path=$PATH
     local source_command=0
-    export PATH="$SUB_PATH:$PATH"
+    export PATH="$NEM_PATH:$PATH"
 
-    libexec_path=$SUB_PATH
+    libexec_path=$NEM_PATH
 
     command="$1"
     case "$command" in
@@ -65,7 +65,7 @@ function nem() {
               $command_path "$@"
           elif [[ "$source_command" -eq 0 ]]; then
               $command_path "$@"
-          else 
+          else
               . $command_path "$@"
           fi
       fi

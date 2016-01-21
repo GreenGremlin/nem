@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Starting Nemesis API server using config: $NEMESIS_ROOT/nemesis/development.ini"
+exec "$NEMESIS_ENV_ROOT/bin/pserve" --reload "$NEMESIS_ROOT/nemesis/development.ini"
+pserve --reload nemesis/development.ini

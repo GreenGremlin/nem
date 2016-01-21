@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Starting thumbor: $THUMBOR_ROOT/bin/thumbor" --conf="$NEMESIS_ROOT/thumbor/thumbor.conf.py"
+exec "$THUMBOR_ROOT/bin/thumbor" --conf="$NEMESIS_ROOT/thumbor/thumbor.conf.py"
