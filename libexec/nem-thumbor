@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Starting thumbor: $THUMBOR_ROOT/bin/thumbor" --conf="$NEMESIS_ROOT/thumbor/thumbor.conf.py"
-exec "$THUMBOR_ROOT/bin/thumbor" --conf="$NEMESIS_ROOT/thumbor/thumbor.conf.py"
+echo "Starting thumbor: $NEMESIS_ROOT/bin/thumbor" --conf="$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py"
+exec "$NEMESIS_ROOT/bin/thumbor" --conf="$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py"
