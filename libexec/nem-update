@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Usage: nem update nemesis
+# Summary: Updates the nemesis environment.
+# Help: Updates all parts of the nemesis environment.
+#   - downloads the latest nemesis manifest (sprinter config)
+#   - fetches git changes
+#   - updates npm dependencies
+#   - updates python dependencies
+#   - updates packaged dependencies (brew / apt-get)
+#   - updates the nemesis database (regenerate_db / migrations)
+
+set -e
+
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    echo "nemesis"
+    exit
+fi
+
+echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
+sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg "$@"

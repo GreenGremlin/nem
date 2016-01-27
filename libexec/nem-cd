@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# SOURCE
+# Usage: sub cd {directoryname}
+# Summary: A quick way to navigate to the nemesis source.
+
+
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    ls $NEMESIS_SRC_SYMLINK
+    exit
+fi
+# elif [ "$2" == "--complete" ]; then
+#     ls $NEMESIS_SRC_SYMLINK/$1
+#     exit
+# fi
+cd $NEMESIS_SRC_SYMLINK/$1

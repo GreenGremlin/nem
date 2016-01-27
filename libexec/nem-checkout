@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
+# Usage: nem checkout
+# Summary: Checkout a nemesis branch
+# Help: This will checkout the given git branch of the nemesis repo.
+
 set -e
+
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    git -C $NEMESIS_SRC_ROOT branch -r | sed -e 's/^  origin\///'
+    exit
+fi
 
 echo "Checking out nemesis : $1"
 exec "git -C $NEMESIS_SRC_ROOT checkout $1"

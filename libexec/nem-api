@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+## Usage: sub api {directoryname}
+# Summary: Starts up the nemesis api server (pserve)
+
 set -e
 
 echo "Starting Nemesis API server using config: $NEMESIS_SRC_ROOT/nemesis/development.ini"

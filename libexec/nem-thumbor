@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+## Usage: sub thumbor {directoryname}
+# Summary: Starts up the nemesis thumbor server.
+
 set -e
 
 echo "Starting thumbor: $NEMESIS_ROOT/bin/thumbor" --conf="$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py"

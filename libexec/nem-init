@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SOURCE
 # to instantiate with this, add:
-# tmp=`pwd`; # cd NEM_PATH/ && . nem-init && cd $tmp
+# tmp=`pwd`; # cd NEM_PATH && . nem-init && cd $tmp
 # to your bashrc
 
 _nem_resolve_link() {
@@ -57,7 +57,7 @@ function nem() {
     * )
       command_path="$(command -v "nem-$command" || true)"
       if [ ! -x "$command_path" ]; then
-        echo "nem: no such command \`$command'"
+        echo "nem: no such command \`$command\`"
       else
           source_command=$(_nem_source $command_path)
           shift

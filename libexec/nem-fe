@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+## Usage: sub fe {directoryname}
+# Summary: Starts up the nemesis front-end dev server (dev-server)
+
 set -e
 
 temp=`pwd`
