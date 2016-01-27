@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Usage: nem update nemesis
+# Usage: nem update [package]
 # Summary: Updates the nemesis environment.
-# Help: Updates all parts of the nemesis environment.
+# Help: Available packages
+#   nemesis
+#
+# Updates all parts of the nemesis environment.
 #   - downloads the latest nemesis manifest (sprinter config)
 #   - fetches git changes
 #   - updates npm dependencies
@@ -11,12 +14,24 @@
 
 set -e
 
+NL=$'\n'
+
 # provide nem completions
 if [ "$1" == "--complete" ]; then
     echo "nemesis"
     exit
 fi
-shift
+if [ "$1" == "nemesis" ]; then
+    echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 
-echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
-sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg "$@"
+    # Ensuring we stay sandboxed by resetting PYTHONPATH
+    PYTHONPATH='' sprinter update nemesis
+    # shift
+    # exec "PYTHONPATH='' sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg '$@'"
+    exit 0
+
+elif [ -n "$1" ]; then
+    echo "${NL}Invalid package: '$1'"
+fi
+echo "${NL}Did you mean?    nem update nemesis${NL}${NL}"
+nem help update

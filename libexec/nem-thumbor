@@ -5,4 +5,5 @@
 set -e
 
 echo "Starting thumbor: $NEMESIS_ROOT/bin/thumbor" --conf="$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py"
-exec "$NEMESIS_ROOT/bin/thumbor" --conf="$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py"
+# Ensuring we stay sandboxed by resetting PYTHONPATH
+PYTHONPATH='' $NEMESIS_ROOT/bin/thumbor --conf=$NEMESIS_SRC_ROOT/thumbor/thumbor.conf.py

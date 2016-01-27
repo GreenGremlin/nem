@@ -5,4 +5,5 @@
 set -e
 
 echo "Starting Nemesis API server using config: $NEMESIS_SRC_ROOT/nemesis/development.ini"
-exec "$NEMESIS_ENV_ROOT/bin/pserve" --reload "$NEMESIS_SRC_ROOT/nemesis/development.ini"
+# Ensuring we stay sandboxed by resetting PYTHONPATH
+PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve --reload $NEMESIS_SRC_ROOT/nemesis/development.ini
