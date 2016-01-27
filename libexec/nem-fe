@@ -4,9 +4,7 @@
 
 set -e
 
-temp=`pwd`
 echo "Starting Nemesis front-end server from $NEMESIS_SRC_ROOT/frontends/flux"
 cd $NEMESIS_SRC_ROOT/frontends/flux/
-npm run start
 
-cd $temp
+npm run start
