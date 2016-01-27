@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Usage: nem fetch
+# Summary: Fetches new changes from origin, updates local master.
+
+set -e
+
+echo " "
+echo "Fetching new changes"
+echo "===================="
+git -C $NEMESIS_SRC_ROOT fetch -p
+
+echo " "
+echo "Merging new changes into master"
+echo "==============================="
+git -C $NEMESIS_SRC_ROOT fetch origin master:master

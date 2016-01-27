@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-## Usage: sub api {directoryname}
+# Usage: nem api {directoryname}
 # Summary: Starts up the nemesis api server (pserve)
 
 set -e

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-## Usage: sub fe {directoryname}
+# Usage: nem fe {directoryname}
 # Summary: Starts up the nemesis front-end dev server (dev-server)
 
 set -e

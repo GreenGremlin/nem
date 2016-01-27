@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SOURCE
-# Usage: sub cd {directoryname}
+# Usage: nem cd {directoryname}
 # Summary: A quick way to navigate to the nemesis source.
 
 

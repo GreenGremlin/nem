@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: nem sync-master
+# Summary: Fetches the latest changes from the remote, and merges mater into the current branch.
+
+set -e
+
+echo "Stashing uncommitted changes"
+echo "============================"
+git -C $NEMESIS_SRC_ROOT stash
+
+echo "Fetching new changes"
+echo "===================="
+git -C $NEMESIS_SRC_ROOT fetch -p
+git -C $NEMESIS_SRC_ROOT fetch origin master:master
+
+echo "Merging master"
+echo "=============="
+git -C $NEMESIS_SRC_ROOT merge master
+
+echo "Restoring stashed changes"
+echo "========================="
+git -C $NEMESIS_SRC_ROOT stash pop

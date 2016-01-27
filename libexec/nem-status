@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-## Usage: sub status {directoryname}
+# Usage: sub status {directoryname}
 # Summary: Check the git status of the nemesis source.
 
 set -e
