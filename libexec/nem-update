@@ -16,6 +16,7 @@ if [ "$1" == "--complete" ]; then
     echo "nemesis"
     exit
 fi
+shift
 
 echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg "$@"
