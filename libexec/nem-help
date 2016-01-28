@@ -9,7 +9,7 @@ print_summaries() {
   local longest_command=0
   local command
 
-  for command in $(nem-commands); do
+  for command in $(nem-commands --no-color); do
     local file="$(command_path "$command")"
     if [ ! -h "$file" ]; then
       local summary="$(summary "$file")"
