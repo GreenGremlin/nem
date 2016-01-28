@@ -31,7 +31,7 @@ _nem_source() {
   echo "1"
 }
 
-export NEM_PATH=`pwd`
+export _NEM_ROOT="$(pwd)"
 
 case "$0" in
 bash | zsh)
@@ -61,7 +61,7 @@ function nem() {
       else
           source_command=$(_nem_source $command_path)
           shift
-          if [[ "$1" -eq "--complete" ]]; then
+          if [[ "${1}" == "--complete" ]]; then
               $command_path "$@"
           elif [[ "$source_command" -eq 0 ]]; then
               $command_path "$@"
