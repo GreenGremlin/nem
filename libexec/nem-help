@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+if [ -f "$_NEM_ROOT/share/bash-colors" ]; then
+    . "$_NEM_ROOT/share/bash-colors"
+fi
+
 print_summaries() {
   local commands=()
   local summaries=()
@@ -27,10 +31,11 @@ print_summaries() {
   local summary_length=$(( $columns - $longest_command - 5 ))
 
   for (( index=0; index < ${#commands[@]}; index++ )); do
-    printf "   %-${longest_command}s  %s\n" "${commands[$index]}" \
+    printf "   "`clr_yellow "%-${longest_command}s"`"  %s\n" "${commands[$index]}" \
       "$(truncate "$summary_length" "${summaries[$index]}")"
   done
 }
+
 
 print_help() {
   local file="$1"

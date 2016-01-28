@@ -6,6 +6,10 @@
 
 set -e
 
+if [ -f "$_NEM_ROOT/share/bash-colors" ]; then
+    . "$_NEM_ROOT/share/bash-colors"
+fi
+
 # Provide nem completions
 if [ "$1" = "--complete" ]; then
   echo --sh
@@ -23,19 +27,24 @@ fi
 
 shopt -s nullglob
 
+if [ "$1" != "--no-color" ]; then
+  function color_fn { echo `clr_yellow $1`; }
+else
+  function color_fn { echo $1; }
+fi
 { for path in ${PATH//:/$'\n'}; do
     for command in "${path}/nem-"*; do
       command="${command##*nem-}"
       if [ -n "$sh" ]; then
         if [ ${command:0:3} = "sh-" ]; then
-          echo ${command##sh-}
+          echo -e `color_fn ${command##sh-}`
         fi
       elif [ -n "$nosh" ]; then
         if [ ${command:0:3} != "sh-" ]; then
-          echo ${command##sh-}
+          echo -e `color_fn ${command##sh-}`
         fi
       else
-        echo ${command##sh-}
+        echo -e `color_fn ${command##sh-}`
       fi
     done
   done
