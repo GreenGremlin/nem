@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: nem re-db {directoryname}
+# Summary: Regenerate the nemesis database (regenerate_db.sh)
+
+set -e
+
+echo "Running: \`$NEMESIS_SRC_ROOT/regenerate_db.sh\`"
+# Ensuring we stay sandboxed by resetting PYTHONPATH
+PYTHONPATH='' $NEMESIS_SRC_ROOT/regenerate_db.sh
