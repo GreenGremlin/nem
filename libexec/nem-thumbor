@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-## Usage: nem thumbor {directoryname}
+## Usage: nem thumbor
 # Summary: Starts up the nemesis thumbor server.
 
 set -e

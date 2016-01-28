@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f "$_NEM_ROOT/share/bash-colors" ]; then
-    . "$_NEM_ROOT/share/bash-colors"
-fi
+[ -f "$_NEM_ROOT/share/bash-colors" ] && . "$_NEM_ROOT/share/bash-colors"
 
 print_summaries() {
   local commands=()

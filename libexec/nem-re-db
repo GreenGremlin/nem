@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: nem re-db {directoryname}
+# Usage: nem re-db
 # Summary: Regenerate the nemesis database (regenerate_db.sh)
 
 set -e
