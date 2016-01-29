@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# I'm fairly certain this script has been supplanted by nem-init.
+
 set -e
 
 resolve_link() {
@@ -53,7 +56,7 @@ case "$command" in
           $command_path "$@"
       elif [[ "$source_command" -eq 0 ]]; then
           $command_path "$@"
-      else 
+      else
           . $command_path "$@"
       fi
   fi

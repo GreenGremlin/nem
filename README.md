@@ -54,7 +54,7 @@ You get a few commands that come with ~~your sub~~ nem:
 * `init`: Shows how to load ~~your sub~~ nem with autocompletions, based on your shell.
 * `shell`: Helps with calling subcommands that might be named the same as builtin/executables.
 
-If you ever need to reference files inside of ~~your sub~~ nem's installation, say to access a file in the `share` directory, ~~your sub~~ nem exposes the directory path in the environment, based on ~~your sub~~ nem's name. For `nem`, the variable name will be `_NEM_ROOT`.
+If you ever need to reference files inside of ~~your sub~~ nem's installation, say to access a file in the `share` directory, ~~your sub~~ nem exposes the directory path in the environment, based on ~~your sub~~ nem's name. For `nem`, the variable name will be `NEM_PATH`.
 
 Here's an example subcommand you could drop into your `libexec` directory to show this in action: (make sure to correct the name!)
 
@@ -62,7 +62,7 @@ Here's an example subcommand you could drop into your `libexec` directory to sho
 #!/usr/bin/env bash
 set -e
 
-echo $_NEM_ROOT
+echo $NEM_PATH/share
 ```
 
 You can also use this environment variable to call other commands inside of your `libexec` directly. Composition of this type very much encourages reuse of small scripts, and keeps scripts doing *one* thing simply.
