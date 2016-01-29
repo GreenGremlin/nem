@@ -50,15 +50,15 @@ function nem() {
 
     libexec_path=$NEM_PATH
 
-    command="$1"
-    case "$command" in
+    last_arg="${@: -1}"
+    case "$last_arg" in
     "" | "-h" | "--help" )
-      nem-help
+      nem-help "$@"
       ;;
     * )
-      command_path="$(command -v "nem-$command" || true)"
+      command_path="$(command -v "nem-$1" || true)"
       if [ ! -x "$command_path" ]; then
-        echo "nem: no such command \`$command\`"
+        echo "nem: no such command \`$1\`"
       else
           source_command=$(_nem_source $command_path)
           shift
