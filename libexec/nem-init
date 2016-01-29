@@ -32,6 +32,7 @@ _nem_source() {
 }
 
 export NEM_PATH="$(pwd)"
+export _NEM_ROOT="$(_nem_abs_dirname "$NEM_PATH")"
 
 case "$0" in
 bash | zsh)
