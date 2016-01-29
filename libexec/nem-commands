@@ -6,7 +6,7 @@
 
 set -e
 
-[ -f "$NEM_PATH/share/bash-colors" ] && . "$NEM_PATH/share/bash-colors"
+[ -f "$_NEM_ROOT/share/bash-colors" ] && . "$_NEM_ROOT/share/bash-colors"
 
 # Provide nem completions
 if [ "$1" = "--complete" ]; then
