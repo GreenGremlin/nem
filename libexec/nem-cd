@@ -1,16 +1,52 @@
 #!/usr/bin/env bash
 # SOURCE
-# Usage: nem cd [directoryname]
+# Usage: nem cd [path | alias]
 # Summary: A quick way to navigate to the nemesis source.
+# Help: Available aliases:
+#   fe    frontends/flux
+#   js    frontends/flux/js
+#   css   frontends/flux/css
+#   nem   nemesis
+#   db    nemesis/database
+#   api   nemesis/webapp
+#   wp    nemesis/wordpress
 
+# until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
+if [[ -n $NEMESIS_SRC_SYMLINK ]]; then
+    root_path=$NEMESIS_SRC_SYMLINK
+else
+    root_path=$NEMESIS_SRC_ROOT
+fi
+
+# aliases
+declare "alias_fe=frontends/flux"
+declare "alias_js=frontends/flux/js"
+declare "alias_css=frontends/flux/css"
+declare "alias_nem=nemesis"
+declare "alias_db=nemesis/database"
+declare "alias_api=nemesis/webapp"
+declare "alias_wp=nemesis/wordpress"
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    ls $NEMESIS_SRC_SYMLINK
+    ls $root_path
     exit
 fi
 # elif [ "$2" == "--complete" ]; then
-#     ls $NEMESIS_SRC_SYMLINK/$1
+#     ls $root_path/$1
 #     exit
 # fi
-cd $NEMESIS_SRC_SYMLINK/$1
+
+if [[ $# -eq 0 || ($# -eq 1 && -d $root_path/$1) ]]; then
+    cd $root_path/$1
+else
+    local alias_key=$1
+    local alias_value="alias_$alias_key"
+    if [[ -n "${!alias_value}" ]]; then
+        cd $root_path/${!alias_value}
+    elif [[ -n `type -t ${1}` ]]; then
+        $@ $root_path
+    else
+        echo "nem: unknown alias or command $1"
+    fi
+fi
