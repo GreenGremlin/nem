@@ -90,7 +90,7 @@ case "$command" in
 Some useful nem commands are:
 $(print_summaries)
 
-See 'nem help <command>' for information on a specific command."
+See 'nem <command> --help' for information on a specific command."
 ;;
 *)
   file="$(command_path "$command")"
