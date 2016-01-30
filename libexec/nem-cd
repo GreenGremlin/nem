@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # SOURCE
-# Usage: nem cd [path | alias]
-# Summary: A quick way to navigate to the nemesis source.
-# Help: Available aliases:
+# Usage: nem cd [path | alias] [command *optional]
+# Summary: A quick way to navigate to the nemesis source, and list it's contents.
+# Help: *Note: If a command is given, the given command will be executed in
+#        a subshell in the destination directory.
+#
+# Available aliases:
 #   fe    frontends/flux
 #   js    frontends/flux/js
 #   css   frontends/flux/css
@@ -11,42 +14,61 @@
 #   api   nemesis/webapp
 #   wp    nemesis/wordpress
 
-# until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
 if [[ -n $NEMESIS_SRC_SYMLINK ]]; then
-    root_path=$NEMESIS_SRC_SYMLINK
+    # until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
+    nemesis_src_root=$NEMESIS_SRC_SYMLINK
 else
-    root_path=$NEMESIS_SRC_ROOT
+    nemesis_src_root=$NEMESIS_SRC_ROOT
 fi
 
+declare -a alias_keys=('fe' 'js' 'css' 'nem' 'db' 'api' 'wp')
+declare -a alias_targets=(
+    'frontends/flux'
+    'frontends/flux/js'
+    'frontends/flux/css'
+    'nemesis'
+    'nemesis/database'
+    'nemesis/webapp'
+    'nemesis/wordpress'
+)
+# for tgt in "${alias_targets[@]}";do echo $tgt;done
+
 # aliases
-declare "alias_fe=frontends/flux"
-declare "alias_js=frontends/flux/js"
-declare "alias_css=frontends/flux/css"
-declare "alias_nem=nemesis"
-declare "alias_db=nemesis/database"
-declare "alias_api=nemesis/webapp"
-declare "alias_wp=nemesis/wordpress"
+declare "alias_fe=$nemesis_src_root/frontends/flux"
+declare "alias_js=$nemesis_src_root/frontends/flux/js"
+declare "alias_css=$nemesis_src_root/frontends/flux/css"
+declare "alias_nem=$nemesis_src_root/nemesis"
+declare "alias_db=$nemesis_src_root/nemesis/database"
+declare "alias_api=$nemesis_src_root/nemesis/webapp"
+declare "alias_wp=$nemesis_src_root/nemesis/wordpress"
+declare "alias_sub=$_NEM_ROOT/libexec"
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    ls $root_path
+    ls $nemesis_src_root
     exit
 fi
-# elif [ "$2" == "--complete" ]; then
-#     ls $root_path/$1
-#     exit
-# fi
 
-if [[ $# -eq 0 || ($# -eq 1 && -d $root_path/$1) ]]; then
-    cd $root_path/$1
-else
-    local alias_key=$1
-    local alias_value="alias_$alias_key"
+dest=$nemesis_src_root
+
+if [ $# -gt 0 ]; then
+    local alias_value="alias_$1"
     if [[ -n "${!alias_value}" ]]; then
-        cd $root_path/${!alias_value}
-    elif [[ -n `type -t ${1}` ]]; then
-        $@ $root_path
-    else
-        echo "nem: unknown alias or command $1"
+        dest=${!alias_value}
+        shift
+    elif [[ -d $nemesis_src_root/$1 ]]; then
+        dest=$nemesis_src_root/$1
+        shift
     fi
+fi
+
+if [ $# -gt 0 ]; then
+    (
+        cmd="$1"
+        shift
+        cd $dest && "$cmd" "$@"
+    )
+else
+    cd $dest
+    ls
 fi
