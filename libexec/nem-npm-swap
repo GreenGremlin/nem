@@ -18,6 +18,9 @@
 #  If you loose track of which node_modules folder is which,
 #  `npm outdated --depth=0` can often be helpful in determining
 #  which is the latest.
+#
+#  When using npm-swap, add this line to your SublimeText preferences:
+#    "binary_file_patterns": [ "node_modules/*", "node_modules.*/*" ]
 
 set -e
 
