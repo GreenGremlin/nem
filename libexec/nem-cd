@@ -22,16 +22,17 @@ else
     nemesis_src_root=$NEMESIS_SRC_ROOT
 fi
 
-declare -a alias_keys=('fe' 'js' 'css' 'nem' 'db' 'api' 'wp')
-declare -a alias_targets=(
-    'frontends/flux'
-    'frontends/flux/js'
-    'frontends/flux/css'
-    'nemesis'
-    'nemesis/database'
-    'nemesis/webapp'
-    'nemesis/wordpress'
-)
+# Array version
+# declare -a alias_keys=('fe' 'js' 'css' 'nem' 'db' 'api' 'wp')
+# declare -a alias_targets=(
+#     'frontends/flux'
+#     'frontends/flux/js'
+#     'frontends/flux/css'
+#     'nemesis'
+#     'nemesis/database'
+#     'nemesis/webapp'
+#     'nemesis/wordpress'
+# )
 # for tgt in "${alias_targets[@]}";do echo $tgt;done
 
 # aliases
