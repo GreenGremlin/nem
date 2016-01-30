@@ -6,13 +6,14 @@
 #        a subshell in the destination directory.
 #
 # Available aliases:
-#   fe    frontends/flux
-#   js    frontends/flux/js
-#   css   frontends/flux/css
-#   nem   nemesis
-#   db    nemesis/database
-#   api   nemesis/webapp
-#   wp    nemesis/wordpress
+#   fe    {git:Nemesis} frontends/flux
+#   js    {git:Nemesis} frontends/flux/js
+#   css   {git:Nemesis} frontends/flux/css
+#   nem   {git:Nemesis} nemesis
+#   db    {git:Nemesis} nemesis/database
+#   api   {git:Nemesis} nemesis/webapp
+#   wp    {git:Nemesis} nemesis/wordpress
+#   sub   {git:nem}     libexec (nem sub-command root)
 
 if [[ -n $NEMESIS_SRC_SYMLINK ]]; then
     # until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
