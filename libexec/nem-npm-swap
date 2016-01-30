@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# Usage: nem npm-swap [restore] [backup=bak]
+# Summary: Backup and restore node_modules <-> node_modules.bak
+# Help:   Restores the node_modules folder and/or creates a backup copy.
+#
+#   i. e. node_modules <-> node_modules.bak
+#
+#   `nem npm-swap`  (with no existing node_modules.bak)
+#         node_modules    (cp)->    node_modules.bak
+#
+#   `nem npm-swap` or `nem npm-swap bak bak`
+#         node_modules      <->    node_modules.bak
+#
+#   `nem npm-swap dev master`
+#         node_modules       ->    node_modules.master
+#         node_modules.dev   ->    node_modules
+#
+#  If you loose track of which node_modules folder is which,
+#  `npm outdated --depth=0` can often be helpful in determining
+#  which is the latest.
+
+set -e
+
+NL=$'\n'
+
+base_dir="$NEMESIS_SRC_ROOT/frontends/flux"
+
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    cd "$base_dir" && ls -d "node_modules."*/ | sed -e 's/^node_modules\.\([a-z,A-Z]*\)\//\1/'
+    exit
+fi
+
+save_key=bak
+restore_key=bak
+if [ $# -gt 1 ]; then
+    restore_key="$1"
+    save_key="$2"
+elif [ $# -gt 0 ]; then
+    restore_key="$1"
+fi
+
+if [[ -e "$base_dir/node_modules.$save_key" && -e "$base_dir/node_modules" ]]; then
+    # only swap if the keys match (by default they do)
+    if [[ "$restore_key" != "$save_key" ]]; then
+        echo "Backup node_modules.$save_key already exists!"
+    else
+        echo "Swapping node_modules and node_modules.$save_key"
+        mv "$base_dir/node_modules.$save_key" "$base_dir/node_modules-swp.$save_key"
+        mv "$base_dir/node_modules" "$base_dir/node_modules.$save_key"
+        mv "$base_dir/node_modules-swp.$save_key" "$base_dir/node_modules"
+        echo "Done swapping node_modules and node_modules.$save_key"
+    fi
+
+elif [[ -n "$restore_key" && -e "$base_dir/node_modules.$restore_key" ]]; then
+    if [[ -e "$base_dir/node_modules" ]]; then
+        echo "Backing up node_modules to node_modules.$save_key"
+        mv "$base_dir/node_modules" "$base_dir/node_modules.$save_key"
+    fi
+
+    echo "Restoring node_modules.$restore_key to node_modules"
+    mv "$base_dir/node_modules.$restore_key" "$base_dir/node_modules"
+
+elif [[ $restore_key == "bak" ]]; then
+    echo "Backing up node_modules to node_modules.$save_key"
+    cp -R "$base_dir/node_modules" "$base_dir/node_modules.$save_key"
+else
+    echo "Error restoring node_modules.$restore_key, node_modules.$restore_key does not exist!"
+fi
