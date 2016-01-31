@@ -6,9 +6,10 @@ set -e
 
 # should we start postgres??
 
-( nem api & )
+# This won't work, we need to kill the sub-processes when the master process ends
+# ( nem api & )
 
-( nem thumbor & )
+# ( nem thumbor & )
 
-( nem fe & )
+# ( nem fe & )
 
