@@ -4,8 +4,11 @@
 
 set -e
 
+# should we start postgres??
+
 ( nem api & )
 
 ( nem thumbor & )
 
 ( nem fe & )
+
