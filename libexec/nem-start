@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Usage: nem start
+# Summary: Starts up the api, thumbor, and fe servers
+
+set -e
+
+( nem api & )
+
+( nem thumbor & )
+
+( nem fe & )
