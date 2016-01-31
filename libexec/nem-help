@@ -85,7 +85,7 @@ fi
 
 command="$1"
 case "$command" in
-"") echo "Usage: nem <command> [<args>]
+"-h" | "--help") echo "Usage: nem <command> [<args>]
 
 Some useful nem commands are:
 $(print_summaries)
@@ -98,7 +98,7 @@ See 'nem <command> --help' for information on a specific command."
   if [ -n "$file" ]; then
     print_help "$file"
   else
-    echo "nem: no such command \`$command'" >&2
+    echo "nem: no such command \`$command\`" >&2
     exit 1
   fi
 esac
