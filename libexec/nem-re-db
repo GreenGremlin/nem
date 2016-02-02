@@ -4,6 +4,11 @@
 
 set -e
 
-echo "Running: \`$NEMESIS_SRC_ROOT/regenerate_db.sh\`"
-# Ensuring we stay sandboxed by resetting PYTHONPATH
-PYTHONPATH='' $NEMESIS_SRC_ROOT/regenerate_db.sh
+# echo "Running: \`$NEMESIS_SRC_ROOT/regenerate_db.sh\`"
+# PYTHONPATH='' $NEMESIS_SRC_ROOT/regenerate_db.sh
+
+# Ensuring we stay sandboxed by clearing PYTHONPATH
+PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/generate_schema | psql -U nemesis -d nemesis
+PYTHONPATH='' $NEMESIS_ROOT/bin/alembic -c $NEMESIS_SRC_ROOT/nemesis/development.ini stamp head
+PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/populate_verticals
+PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/load_data -t
