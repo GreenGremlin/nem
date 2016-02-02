@@ -1,14 +1,36 @@
 #!/usr/bin/env bash
 # Usage: nem re-db
-# Summary: Regenerate the nemesis database (regenerate_db.sh)
+# Summary: Regenerate the nemesis database (from regenerate_db.sh)
 
 set -e
 
-# echo "Running: \`$NEMESIS_SRC_ROOT/regenerate_db.sh\`"
-# PYTHONPATH='' $NEMESIS_SRC_ROOT/regenerate_db.sh
-
 # Ensuring we stay sandboxed by clearing PYTHONPATH
+
+echo " "
+echo "======================================"
+echo "Generating schema..."
+echo "======================================"
 PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/generate_schema | psql -U nemesis -d nemesis
+
+echo " "
+echo "======================================"
+echo "Stamping head..."
+echo "======================================"
 PYTHONPATH='' $NEMESIS_ROOT/bin/alembic -c $NEMESIS_SRC_ROOT/nemesis/development.ini stamp head
+
+echo " "
+echo "======================================"
+echo "Populating verticals..."
+echo "======================================"
 PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/populate_verticals
+
+echo " "
+echo "======================================"
+echo "Loading test data..."
+echo "======================================"
 PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/load_data -t
+
+echo " "
+echo "======================================"
+echo "Finished!"
+
