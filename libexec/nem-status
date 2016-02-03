@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# Usage: sub status
-# Summary: Check the git status of the nemesis source.
-
-set -e
-
-git -C $NEMESIS_SRC_ROOT status $1

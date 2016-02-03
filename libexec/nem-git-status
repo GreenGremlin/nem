@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: nem git-status
+# Summary: Check the git status of the local nemesis repo.
+
+set -e
+
+git -C $NEMESIS_SRC_ROOT status $1
