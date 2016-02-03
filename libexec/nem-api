@@ -12,12 +12,17 @@ if [ "$1" == "--complete" ]; then
 fi
 
 opt_stop="false"
+opt_status="false"
 opt_reload="false"
-for arg in "$@"
+
+for opt in "$@"
 do
     case $opt in
         stop|--stop-daemon)
             opt_stop="true"
+            ;;
+        status)
+            opt_status="true"
             ;;
         --reload)
             opt_reload="true"
@@ -28,7 +33,7 @@ done
 extra_options=""
 
 # if we're not stopping defaut to --reload
-if [[ "$opt_stop" != "true" && "$opt_reload" != "true" ]]; then
+if [[ "$opt_stop" != "true" && "$opt_reload" != "true" && "$opt_status" != "true" ]]; then
     extra_options=--reload
 fi
 
