@@ -1,9 +1,37 @@
 #!/usr/bin/env bash
-# Usage: nem api
-# Summary: Starts up the nemesis api server (pserve)
+# Usage: nem api [start|stop|restart|status]
+# Summary: Start/stops the nemesis api server (pserve)
+# Help: To run in the foreground, just run "nem api".
 
 set -e
 
-echo "Starting Nemesis API server using config: $NEMESIS_SRC_ROOT/nemesis/development.ini"
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    echo "start stop restart status --help"
+    exit
+fi
+
+opt_stop="false"
+opt_reload="false"
+for arg in "$@"
+do
+    case $opt in
+        stop|--stop-daemon)
+            opt_stop="true"
+            ;;
+        --reload)
+            opt_reload="true"
+            ;;
+    esac
+done
+
+extra_options=""
+
+# if we're not stopping defaut to --reload
+if [[ "$opt_stop" != "true" && "$opt_reload" != "true" ]]; then
+    extra_options=--reload
+fi
+
+echo "Using Nemesis API config: $NEMESIS_SRC_ROOT/nemesis/development.ini"
 # Ensuring we stay sandboxed by resetting PYTHONPATH
-PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve --reload $NEMESIS_SRC_ROOT/nemesis/development.ini
+PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve $NEMESIS_SRC_ROOT/nemesis/development.ini "$@" $extra_options
