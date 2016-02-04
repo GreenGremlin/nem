@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Usage: nem stop
+# Summary: Stops the api, thumbor, and fe servers
+
+set -e
+
+$NEMESIS_ROOT/bin/supervisorctl shutdown -c $NEMESIS_ENV_ROOT/supervisord.conf
+
+# # provide nem completions
+# if [ "$1" == "--complete" ]; then
+#     echo "api thumbor fe"
+#     exit
+# fi
+
+# opt_api="false"
+# opt_thumbor="false"
+# opt_fe="false"
+
+# for opt in "$@"
+# do
+#     case $opt in
+#         api)
+#             opt_api="true"
+#             ;;
+#         thumbor)
+#             opt_thumbor="true"
+#             ;;
+#         fe)
+#             opt_fe="true"
+#             ;;
+#     esac
+# done
+
+# extra_options=""
+
+# if [[ "$opt_api" != "true" && "$opt_thumbor" != "true" && "$opt_fe" != "true" ]]; then
+#     echo "Killing api session"
+#     screen -X -S nem_api quit
+#     echo "Killing thumbor session"
+#     screen -X -S nem_thumbor quit
+# else
+#     if [ "$opt_api" != "true" ]; then
+#         echo "Killing api session"
+#         screen -X -S nem_api quit
+#     fi
+#     if [ "$opt_thumbor" != "true" ]; then
+#         echo "Killing thumbor session"
+#         screen -X -S nem_thumbor quit
+#     fi
+# fi
+

@@ -4,12 +4,67 @@
 
 set -e
 
-# should we start postgres??
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    echo "api thumbor fe"
+    exit
+fi
 
-# This won't work, we need to kill the sub-processes when the master process ends
-# ( nem api & )
+$NEMESIS_ROOT/bin/supervisord -n -c $NEMESIS_ENV_ROOT/supervisord.conf
 
-# ( nem thumbor & )
+# opt_api="false"
+# opt_thumbor="false"
+# opt_fe="false"
 
-# ( nem fe & )
+# for opt in "$@"
+# do
+#     case $opt in
+#         api)
+#             opt_api="true"
+#             ;;
+#         thumbor)
+#             opt_thumbor="true"
+#             ;;
+#         fe)
+#             opt_fe="true"
+#             ;;
+#     esac
+# done
 
+# extra_options=""
+
+# start_bg {
+#     echo "Starting $2"
+#     if [[ "$OSTYPE" == "darwin"* ]]; then
+#         screen -dmS nem_$1 bash -c "source ~/.bashrc; nem $1"
+#     else
+#         screen -dmS nem_$1 bash -c 'nem $1;'
+#     fi
+# }
+
+# # should we start postgres??
+
+# if [[ "$opt_api" != "true" && "$opt_thumbor" != "true" && "$opt_fe" != "true" ]]; then
+
+#     if [ "$OSTYPE" == "darwin"* ]; then
+#         # os x doesn't source bashrc or bash_profile in non-interactive shells
+#         start_bg 'api' 'pyramid api server'
+#         start_bg 'thumbor' 'thumbor'
+#     else
+#         screen -dmS nem_thumbor bash -c 'nem thumbor;'
+#         screen -dmS nem_api bash -c 'nem api;'
+#     fi
+#     echo "Starting fe dev-server"
+#     nem fe
+# else
+#     if [ "$opt_api" != "true" ]; then
+#         start_bg 'api' 'pyramid api server'
+#     fi
+#     if [ "$opt_thumbor" != "true" ]; then
+#         start_bg 'thumbor' 'thumbor'
+#     fi
+#     if [ "$opt_fe" != "true" ]; then
+#         echo "Starting fe dev-server"
+#         nem fe
+#     fi
+# fi
