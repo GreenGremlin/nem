@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Usage: nem logs [api|fe|thumbor]
-# Summary: View the nemesis logs via lnav
+# Usage: nem tail [api|fe|thumbor]
+# Summary: View the nemesis logs via tail
 # Help: By default, all logs are viewed. To view logs
-# for a single system, call `nem logs [system]`
+# for a single system, call `nem tail [system]`
 
 set -e
 
@@ -32,13 +32,13 @@ do
 done
 
 if [[ "$opt_api" != "true" && "$opt_thumbor" != "true" && "$opt_fe" != "true" ]]; then
-    lnav $NEMESIS_ENV_ROOT/logs
+    tail -f $NEMESIS_ENV_ROOT/logs/*
 else
     if [ "$opt_api" != "true" ]; then
-        lnav $NEMESIS_ENV_ROOT/logs/nemesis.log
+        tail -f $NEMESIS_ENV_ROOT/logs/nemesis.log
     elif [ "$opt_thumbor" != "true" ]; then
-        lnav $NEMESIS_ENV_ROOT/logs/thumbor.log
+        tail -f $NEMESIS_ENV_ROOT/logs/thumbor.log
     elif [ "$opt_fe" != "true" ]; then
-        lnav $NEMESIS_ENV_ROOT/logs/fe-server.log
+        tail -f $NEMESIS_ENV_ROOT/logs/fe-server.log
     fi
 fi
