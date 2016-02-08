@@ -25,7 +25,8 @@ if [ "$1" == "nemesis" ]; then
     echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 
     # Ensuring we stay sandboxed by resetting PYTHONPATH
-    PYTHONPATH='' sprinter update nemesis
+    schema_md5=$(md5 -q)
+    # PYTHONPATH='' sprinter update nemesis
     # shift
     # exec "PYTHONPATH='' sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg '$@'"
     exit 0
