@@ -6,21 +6,14 @@
 #        a subshell in the destination directory.
 #
 # Available aliases:
-#   fe    {git:Nemesis} frontends/flux
-#   js    {git:Nemesis} frontends/flux/js
-#   css   {git:Nemesis} frontends/flux/css
-#   nem   {git:Nemesis} nemesis
-#   db    {git:Nemesis} nemesis/database
-#   api   {git:Nemesis} nemesis/webapp
-#   wp    {git:Nemesis} nemesis/wordpress
-#   sub   {git:nem}     libexec (nem sub-command root)
-
-if [[ -n $NEMESIS_SRC_SYMLINK ]]; then
-    # until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
-    nemesis_src_root=$NEMESIS_SRC_SYMLINK
-else
-    nemesis_src_root=$NEMESIS_SRC_ROOT
-fi
+#   fe    {NEMESIS_SRC_ROOT}/frontends/flux
+#   js    {NEMESIS_SRC_ROOT}/frontends/flux/js
+#   css   {NEMESIS_SRC_ROOT}/frontends/flux/css
+#   nem   {NEMESIS_SRC_ROOT}/nemesis
+#   db    {NEMESIS_SRC_ROOT}/nemesis/database
+#   api   {NEMESIS_SRC_ROOT}/nemesis/webapp
+#   wp    {NEMESIS_SRC_ROOT}/nemesis/wordpress
+#   sub   {_NEM_ROOT}/libexec (nem sub-command root)
 
 # Array version
 # declare -a alias_keys=('fe' 'js' 'css' 'nem' 'db' 'api' 'wp')
@@ -36,30 +29,30 @@ fi
 # for tgt in "${alias_targets[@]}";do echo $tgt;done
 
 # aliases
-declare "alias_fe=$nemesis_src_root/frontends/flux"
-declare "alias_js=$nemesis_src_root/frontends/flux/js"
-declare "alias_css=$nemesis_src_root/frontends/flux/css"
-declare "alias_nem=$nemesis_src_root/nemesis"
-declare "alias_db=$nemesis_src_root/nemesis/database"
-declare "alias_api=$nemesis_src_root/nemesis/webapp"
-declare "alias_wp=$nemesis_src_root/nemesis/wordpress"
+declare "alias_fe=$NEMESIS_SRC_ROOT/frontends/flux"
+declare "alias_js=$NEMESIS_SRC_ROOT/frontends/flux/js"
+declare "alias_css=$NEMESIS_SRC_ROOT/frontends/flux/css"
+declare "alias_nem=$NEMESIS_SRC_ROOT/nemesis"
+declare "alias_db=$NEMESIS_SRC_ROOT/nemesis/database"
+declare "alias_api=$NEMESIS_SRC_ROOT/nemesis/webapp"
+declare "alias_wp=$NEMESIS_SRC_ROOT/nemesis/wordpress"
 declare "alias_sub=$_NEM_ROOT/libexec"
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    ls $nemesis_src_root
+    ls $NEMESIS_SRC_ROOT
     exit
 fi
 
-dest=$nemesis_src_root
+dest=$NEMESIS_SRC_ROOT
 
 if [ $# -gt 0 ]; then
     local alias_value="alias_$1"
     if [[ -n "${!alias_value}" ]]; then
         dest=${!alias_value}
         shift
-    elif [[ -d $nemesis_src_root/$1 ]]; then
-        dest=$nemesis_src_root/$1
+    elif [[ -d $NEMESIS_SRC_ROOT/$1 ]]; then
+        dest=$NEMESIS_SRC_ROOT/$1
         shift
     fi
 fi
