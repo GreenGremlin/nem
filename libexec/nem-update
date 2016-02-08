@@ -25,10 +25,17 @@ if [ "$1" == "nemesis" ]; then
     echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 
     # Ensuring we stay sandboxed by resetting PYTHONPATH
-    schema_md5=$(md5 -q)
+    schema_md5=$(md5 -q $NEMESIS_SRC_ROOT/nemesis/database/schema.py)
     # PYTHONPATH='' sprinter update nemesis
     # shift
     # exec "PYTHONPATH='' sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg '$@'"
+    new_schema_md5=$(md5 -q $NEMESIS_SRC_ROOT/nemesis/database/schema.py)
+    if [[ $schema_md5 != $new_schema_md5 ]]; then
+        echo
+        echo "Nemesis database schema has been updated"
+        echo "========= Regenerating database ========"
+        nem re-db
+    fi
     exit 0
 
 elif [ -n "$1" ]; then
