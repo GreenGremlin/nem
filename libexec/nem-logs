@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: nem logs
+# Summary: View the nemesis logs via lnav
+
+set -e
+
+lnav $NEMESIS_ENV_ROOT/logs
