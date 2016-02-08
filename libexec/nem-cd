@@ -6,6 +6,7 @@
 #        a subshell in the destination directory.
 #
 # Available aliases:
+#   logs  {NEMESIS_ENV_ROOT}/logs
 #   fe    {NEMESIS_SRC_ROOT}/frontends/flux
 #   js    {NEMESIS_SRC_ROOT}/frontends/flux/js
 #   css   {NEMESIS_SRC_ROOT}/frontends/flux/css
@@ -29,6 +30,7 @@
 # for tgt in "${alias_targets[@]}";do echo $tgt;done
 
 # aliases
+declare "alias_logs=$NEMESIS_ENV_ROOT/logs"
 declare "alias_fe=$NEMESIS_SRC_ROOT/frontends/flux"
 declare "alias_js=$NEMESIS_SRC_ROOT/frontends/flux/js"
 declare "alias_css=$NEMESIS_SRC_ROOT/frontends/flux/css"

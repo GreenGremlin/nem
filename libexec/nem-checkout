@@ -5,23 +5,16 @@
 
 set -e
 
-if [[ -n $NEMESIS_SRC_SYMLINK ]]; then
-    # until we can figure out how $NEMESIS_SRC_SYMLINK is getting unset
-    nemesis_src_root=$NEMESIS_SRC_SYMLINK
-else
-    nemesis_src_root=$NEMESIS_SRC_ROOT
-fi
-
 [ -f "$_NEM_ROOT/share/bash-colors" ] && . "$_NEM_ROOT/share/bash-colors"
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    git -C $nemesis_src_root branch -r | sed -e 's/^  origin\///'
+    git -C $NEMESIS_SRC_ROOT branch -r | sed -e 's/^  origin\///'
     exit
 fi
 
 echo "Fetching the latest changes"
-git -C $nemesis_src_root fetch -p
+git -C $NEMESIS_SRC_ROOT fetch -p
 echo "Checking out nemesis: $1"
-git -C $nemesis_src_root checkout $1
-echo "Nemesis source now at branch: $(clr_magenta $(git -C $nemesis_src_root rev-parse --abbrev-ref HEAD))"
+git -C $NEMESIS_SRC_ROOT checkout $1
+echo "Nemesis source now at branch: $(clr_magenta $(git -C $NEMESIS_SRC_ROOT rev-parse --abbrev-ref HEAD))"
