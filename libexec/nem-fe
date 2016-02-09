@@ -7,4 +7,5 @@ set -e
 echo "Starting Nemesis front-end server from $NEMESIS_SRC_ROOT/frontends/flux"
 cd $NEMESIS_SRC_ROOT/frontends/flux/
 
-npm run start
+node $NEMESIS_SRC_ROOT/frontends/flux/webpack/dev-server.js
+# npm run start
