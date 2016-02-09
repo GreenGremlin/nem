@@ -8,13 +8,14 @@ set -e
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    echo "api thumbor fe"
+    echo "api thumbor fe supervisor"
     exit
 fi
 
 opt_api="false"
 opt_thumbor="false"
 opt_fe="false"
+opt_supervisor="false"
 
 for opt in "$@"
 do
@@ -28,10 +29,13 @@ do
         fe)
             opt_fe="true"
             ;;
+        supervisor)
+            opt_supervisor="true"
+            ;;
     esac
 done
 
-if [[ "$opt_api" != "true" && "$opt_thumbor" != "true" && "$opt_fe" != "true" ]]; then
+if [[ "$opt_api" != "true" && "$opt_thumbor" != "true" && "$opt_fe" != "true" && "$opt_supervisor" != "true" ]]; then
     tail -f $NEMESIS_ENV_ROOT/logs/*
 else
     if [ "$opt_api" != "true" ]; then
@@ -39,6 +43,8 @@ else
     elif [ "$opt_thumbor" != "true" ]; then
         tail -f $NEMESIS_ENV_ROOT/logs/thumbor.log
     elif [ "$opt_fe" != "true" ]; then
-        tail -f $NEMESIS_ENV_ROOT/logs/fe-server.log
+        tail -f $NEMESIS_ENV_ROOT/logs/dev-server.log
+    elif [ "$opt_supervisor" != "true" ]; then
+        tail -f $NEMESIS_ENV_ROOT/logs/supervisord.log
     fi
 fi
