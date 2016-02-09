@@ -6,6 +6,17 @@ set -e
 
 # Ensuring we stay sandboxed by clearing PYTHONPATH
 
+if [[ -z $(ps ax | grep "[p]ostgres") ]]; then
+  echo "Postgres not running"
+  echo "starting postgres..."
+  postgres_status=$(launchctl load -F /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist 2>&1)
+  if [[ $postgres_status != *"loaded"* ]]; then
+    echo "waiting for postgres..."
+    sleep 2
+    echo $postgres_status
+  fi
+fi
+
 echo " "
 echo "======================================"
 echo "Generating schema..."
@@ -33,4 +44,9 @@ PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/load_data -t
 echo " "
 echo "======================================"
 echo "Finished!"
+
+if [[ $postgres_status == *"loaded"* ]]; then
+  echo "stopping postgres..."
+  $(launchctl unload /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist 2>&1)
+fi
 
