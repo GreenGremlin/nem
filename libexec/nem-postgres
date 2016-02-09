@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: nem postgres
+# Summary: Starts up the nemesis postgres server
+
+set -e
+
+echo "Starting postgres server"
+postgres -D /usr/local/var/postgres
