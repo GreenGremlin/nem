@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: nem status
+# Summary: Check the status of nemesis servers.
+
+set -e
+
+$NEMESIS_ROOT/bin/supervisorctl -c $NEMESIS_ENV_ROOT/supervisord.conf
