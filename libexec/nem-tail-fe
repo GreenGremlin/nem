@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: nem tail-fe
+# Summary: View the nemesis dev-server logs via tail
+
+set -e
+
+tail -f $NEMESIS_ENV_ROOT/logs/dev-server.log
