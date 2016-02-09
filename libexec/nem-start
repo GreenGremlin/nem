@@ -10,7 +10,8 @@ if [ "$1" == "--complete" ]; then
     exit
 fi
 
-$NEMESIS_ROOT/bin/supervisord -n -c $NEMESIS_ENV_ROOT/supervisord.conf
+$NEMESIS_ROOT/bin/supervisord -c $NEMESIS_ENV_ROOT/supervisord.conf
+nem tail
 
 # opt_api="false"
 # opt_thumbor="false"
