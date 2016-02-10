@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: nem chromedriver -k|--kill
+# Summary: List and optionally kill chromedriver instances.
+
+set -e
+
+opt_kill="false"
+
+for opt in "$@"
+do
+    case $opt in
+        -k|--kill)
+            opt_kill="true"
+            ;;
+    esac
+done
+
+if [ "$opt_kill" == "true" ]; then
+    kill $(ps ax | grep [c]hromedriver\/ | awk '{print $1}')
+else
+    ps ax | grep --color=auto '[c]hromedriver\/\|[P]ID '
+fi
