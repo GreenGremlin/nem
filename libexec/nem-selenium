@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: nem selenium [chrome|firefox]
+# Summary: Executes the selenium tests
+
+set -e
+
+nightwatch_exe="$NEMESIS_SRC_ROOT/frontends/flux/node_modules/nightwatch/bin/nightwatch"
+
+# provide nem completions
+if [ "$1" == "--complete" ]; then
+    echo "chrome firefox chrome-debug"
+    exit
+fi
+
+nightwatch_environment="chrome"
+
+if [ $# -gt 0 ]; then
+    nightwatch_environment="$1"
+    shift
+fi
+
+$nightwatch_exe --env $nightwatch_environment "$@"
