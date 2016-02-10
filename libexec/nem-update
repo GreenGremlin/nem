@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-# Usage: nem update [package]
+# Usage: nem update [nemesis|nem]
 # Summary: Updates the nemesis environment.
 # Help: Available packages
-#   nemesis
 #
-# Updates all parts of the nemesis environment.
-#   - downloads the latest nemesis manifest (sprinter config)
-#   - fetches git changes
-#   - updates npm dependencies
-#   - updates python dependencies
-#   - updates packaged dependencies (brew / apt-get)
-#   - updates the nemesis database (regenerate_db / migrations)
+# nemesis:
+#   Updates all parts of the nemesis environment.
+#     - downloads the latest nemesis manifest (sprinter config)
+#     - fetches git changes
+#     - updates npm dependencies
+#     - updates python dependencies
+#     - updates packaged dependencies (brew / apt-get)
+#     - updates the nemesis database (regenerate_db / migrations)
+#
+# nem:
+#   Updates just the nem sub-commands
 
 set -e
 
@@ -18,10 +21,11 @@ NL=$'\n'
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
-    echo "nemesis"
+    echo "nemesis nem"
     exit
-fi
-if [ "$1" == "nemesis" ]; then
+elfi
+
+git -C
     echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 
     # Ensuring we stay sandboxed by resetting PYTHONPATH
@@ -38,9 +42,14 @@ if [ "$1" == "nemesis" ]; then
         nem re-db
     fi
     exit 0
-
+elif [ "$1" == "nem" ]; then
+    echo "Updating nem sub-commands"
+    git -C $_NEM_ROOT stash
+    git -C $_NEM_ROOT pull --rebase
+    git -C $_NEM_ROOT stash pop
 elif [ -n "$1" ]; then
     echo "${NL}Invalid package: '$1'"
+else
+    echo "${NL}Did you mean?    nem update nemesis${NL}${NL}"
+    nem help update
 fi
-echo "${NL}Did you mean?    nem update nemesis${NL}${NL}"
-nem help update
