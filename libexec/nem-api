@@ -39,4 +39,4 @@ fi
 echo "Using Nemesis API config: $NEMESIS_SRC_ROOT/nemesis/development.ini"
 # echo "PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve $NEMESIS_SRC_ROOT/nemesis/development.ini "$@" $extra_options"
 # Ensuring we stay sandboxed by resetting PYTHONPATH
-PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve $NEMESIS_SRC_ROOT/nemesis/development.ini "$@" $extra_options
+cd $NEMESIS_SRC_ROOT; PYTHONPATH='' $NEMESIS_ENV_ROOT/bin/pserve $NEMESIS_SRC_ROOT/nemesis/development.ini "$@" $extra_options
