@@ -41,14 +41,16 @@ if [ "$1" == "nemesis" ]; then
         echo "========= Regenerating database ========"
         nem re-db
     fi
-    exit 0
+
 elif [ "$1" == "nem" ]; then
     echo "Updating nem sub-commands"
     git -C $_NEM_ROOT stash
     git -C $_NEM_ROOT pull --rebase
     git -C $_NEM_ROOT stash pop
+
 elif [ -n "$1" ]; then
     echo "${NL}Invalid package: '$1'"
+
 else
     echo "${NL}Did you mean?    nem update nemesis${NL}${NL}"
     nem help update
