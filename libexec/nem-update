@@ -23,9 +23,9 @@ NL=$'\n'
 if [ "$1" == "--complete" ]; then
     echo "nemesis nem"
     exit
-elfi
+fi
 
-git -C
+if [ "$1" == "nemesis" ]; then
     echo "Updating Nemesis environment from $NEMESIS_SRC_ROOT/nemesis-manifest.cfg"
 
     # Ensuring we stay sandboxed by resetting PYTHONPATH
