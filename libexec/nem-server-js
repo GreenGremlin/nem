@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Usage: nem server-js
+# Summary: Starts up the nemesis render server
+
+set -e
+
+echo "Starting Nemesis render server from $NEMESIS_SRC_ROOT/frontends/flux"
+cd $NEMESIS_SRC_ROOT/frontends/flux/
+
+node $NEMESIS_SRC_ROOT/frontends/flux/build/server.js
+# npm run serve
