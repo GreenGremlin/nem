@@ -52,7 +52,7 @@ function nem() {
 
     last_arg="${@: -1}"
     case "$last_arg" in
-    "" | "-h" | "--help" )
+    "" | "-h" | "--help" | "help" )
       nem-help "$@"
       ;;
     * )

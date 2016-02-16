@@ -85,7 +85,7 @@ fi
 
 command="$1"
 case "$command" in
-"-h" | "--help") echo "Usage: nem <command> [<args>]
+"-h" | "--help" | "help") echo "Usage: nem <command> [<args>]
 
 Some useful nem commands are:
 $(print_summaries)
