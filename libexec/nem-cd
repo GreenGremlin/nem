@@ -16,6 +16,16 @@
 #   wp    {NEMESIS_SRC_ROOT}/nemesis/wordpress
 #   sub   {_NEM_ROOT}/libexec (nem sub-command root)
 
+declare "alias_logs=$NEMESIS_ENV_ROOT/logs"
+declare "alias_fe=$NEMESIS_SRC_ROOT/frontends/flux"
+declare "alias_js=$NEMESIS_SRC_ROOT/frontends/flux/js"
+declare "alias_css=$NEMESIS_SRC_ROOT/frontends/flux/css"
+declare "alias_nem=$NEMESIS_SRC_ROOT/nemesis"
+declare "alias_db=$NEMESIS_SRC_ROOT/nemesis/database"
+declare "alias_api=$NEMESIS_SRC_ROOT/nemesis/webapp"
+declare "alias_wp=$NEMESIS_SRC_ROOT/nemesis/wordpress"
+declare "alias_sub=$_NEM_ROOT/libexec"
+
 # Array version
 # declare -a alias_keys=('fe' 'js' 'css' 'nem' 'db' 'api' 'wp')
 # declare -a alias_targets=(
@@ -28,17 +38,6 @@
 #     'nemesis/wordpress'
 # )
 # for tgt in "${alias_targets[@]}";do echo $tgt;done
-
-# aliases
-declare "alias_logs=$NEMESIS_ENV_ROOT/logs"
-declare "alias_fe=$NEMESIS_SRC_ROOT/frontends/flux"
-declare "alias_js=$NEMESIS_SRC_ROOT/frontends/flux/js"
-declare "alias_css=$NEMESIS_SRC_ROOT/frontends/flux/css"
-declare "alias_nem=$NEMESIS_SRC_ROOT/nemesis"
-declare "alias_db=$NEMESIS_SRC_ROOT/nemesis/database"
-declare "alias_api=$NEMESIS_SRC_ROOT/nemesis/webapp"
-declare "alias_wp=$NEMESIS_SRC_ROOT/nemesis/wordpress"
-declare "alias_sub=$_NEM_ROOT/libexec"
 
 # provide nem completions
 if [ "$1" == "--complete" ]; then
