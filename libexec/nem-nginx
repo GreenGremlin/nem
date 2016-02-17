@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: nem nginx
+# Summary: Starts nginx
+
+set -e
+
+cd $NEMESIS_SRC_ROOT; sudo nginx
