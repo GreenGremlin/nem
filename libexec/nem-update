@@ -30,10 +30,7 @@ if [ "$1" == "nemesis" ]; then
 
     # Ensuring we stay sandboxed by resetting PYTHONPATH
     schema_md5=$(md5 -q $NEMESIS_SRC_ROOT/nemesis/database/schema.py)
-    # PYTHONPATH='' sprinter update nemesis
-    # shift
-    # exec "PYTHONPATH='' sprinter install $NEMESIS_SRC_ROOT/nemesis-manifest.cfg '$@'"
-    PYTHONPATH='' sprinter update nemesis
+    sprinter update nemesis
     new_schema_md5=$(md5 -q $NEMESIS_SRC_ROOT/nemesis/database/schema.py)
     if [[ $schema_md5 != $new_schema_md5 ]]; then
         echo
