@@ -1,6 +1,6 @@
 # ~~sub~~ nem: a delicious way to organize programs
 
-Sub is a model for setting up shell programs that use subcommands, like `git` or `rbenv` using bash. Making a nem subcommand does not require you to write shell scripts in bash, you can write subcommands in any scripting language you prefer.
+~~Sub~~ Nem is a model for setting up shell programs that use subcommands, like `git` or `rbenv` using bash. Making a ~~sub~~ nem subcommand does not require you to write shell scripts in bash, you can write subcommands in any scripting language you prefer.
 
 A nem subcommand is run at the command line using this style:
 
